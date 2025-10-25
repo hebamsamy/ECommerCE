@@ -1,0 +1,81 @@
+﻿@using ECommerce.DTOs
+@model PaginationDTO<ProductDetailsDTO>
+@{
+    var catagories = ViewData["Categories"] as List<SelectListItem>; 
+    bool canMoveNext = Model.Count >= (Model.PageSize * Model.PageNumber);
+    bool canMovePrev = Model.PageNumber > 1;
+}
+@section Styles {
+    <style>
+        .bbttnn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+}
+
+<form class="row mb-5" asp-action="index" method="get" >
+    <div class="col-4">
+        <label>Search For Your Product</label>
+        <input class="form-control" type="text" name="SearchText" />
+    </div>
+    <div class="col-4">
+        <label>Search For Shop</label>
+        <input class="form-control" type="text" name="ShopName" />
+    </div>
+    <div class="col-4">
+        <label>Select price</label>
+        <input class="form-control" type="number" name="Price" />
+    </div>
+    <div class="col-4">
+        <label>Select Category</label>
+        <select class="form-control" name="CategoryId" asp-items="@catagories">
+            <option value="0" selected>choose one Category</option>
+        </select>
+    </div>
+    <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
+    <input class="btn btn-light" type="submit" value="Filter" />
+</form>
+
+
+<a asp-action= "add" asp-controller="product" class="bbttnn">Add New Product</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Category</th>
+            <th colspan="2">action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.List)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>@product.CategoryName</td>
+                <td><a asp-action="Details" asp-route-id="@product.Id"> See Details</a></td>
+                <td><a asp-action="Delete" asp-route-id="@product.Id"> Delete</a></td>
+            </tr>
+        }
+</table>
+
+@* <div>
+    <a asp-action="index" asp-route-pageNumber="@(Model.PageNumber - 1)"  disabled="@canMovePrev" >Previos</a>
+    <a asp-action="index" asp-route-pageNumber="@(Model.PageNumber + 1)" disabled="@canMoveNext">NexT</a>
+</div> *@
+
+
+

@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+
+@model UserLoginDTO;
+
+
+<html>
+    <head>
+    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/adminstyle.css" asp-append-version="true" />
+    </head>
+    <body>
+        <div class="container">
+            <h2>Login</h2>
+            <form asp-action="Login" asp-controller="Account" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Text"></label>
+                    <input asp-for="Text" class="form-control" />
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RememberMe"></label>
+                <input asp-for="RememberMe" class="form-check" />
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
+            <button class="btn btn-primary" type="submit"> Login</button>
+            <a class="btn btn-link" asp-action="register">Don't have an account? Register here.</a>
+            <a class="btn btn-link" asp-action="ForgetPassword">Forget Your Password?</a>
+            </form>
+
+
+        <a href="/Account/ExternalLogin?provider=Google&returnUrl=/">Login with Google</a>
+
+        </div>
+    </body>
+</html>
+
+

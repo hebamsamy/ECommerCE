@@ -1,0 +1,63 @@
+﻿@using ECommerce.DTOs
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@model ProductDetailsDTO;
+
+
+
+<h1>Product Details Page For Product ID @Model.Id</h1>
+
+
+<div>
+    @if (Model.ProductImages != null && Model.ProductImages.Count > 0){
+        @foreach(var image in Model.ProductImages)
+        {
+            <img  src="@image"/>
+        }
+    }
+    <h2>@Model.Name</h2>
+    <p>@Model.Description</p>
+    <p>Price: @Model.Price $</p>
+@*     @if(Model.Quantity == 0)
+    {
+        <p style="color:red">Out of Stock</p>
+    }
+    else if(Model.Quantity < 5)
+    {
+        <p style="color:orange">Only @Model.Quantity items left in stock!</p>
+    }
+    else
+    {
+        <p style="color:green">In Stock</p>
+}
+) *@
+    <p>Available Stock: @Model.Quantity</p>
+   
+    <span quantity="@Model.Quantity"></span>
+
+    <p>Category: @Model.CategoryName</p>
+    <p>Supplier: @Model.SupplierName</p>
+    <p>Shop Name: @Model.ShopName</p>
+
+
+    @* <form asp-action="AddToCart" method="post">
+        <input type="hidden" name="productId" value="@Model.Id" />
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" max="@Model.Quantity" />
+        <button type="submit">Add to Cart</button>
+    </form> *@
+
+
+
+    <div style="margin-bottom:200px"></div>
+
+
+    @* <vc:releted-product category-id="@Model.CategoryId"></vc:releted-product> *@
+    <vc:releted-product supplier-id="@Model.SupplierId"></vc:releted-product>
+
+
+

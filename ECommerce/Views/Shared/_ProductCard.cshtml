@@ -1,0 +1,25 @@
+﻿@using ECommerce.DTOs
+@model ProductDetailsDTO;
+
+
+<div class="col-4">
+    <div class="card">
+        @if (Model.ProductImages.Any())
+        {
+            <img src="@Model.ProductImages.FirstOrDefault()" class="card-img-top" alt="...">
+            
+        }
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+            <p class="card-text">@Model.Price</p>
+            <span quantity="@Model.Quantity"></span>
+            <p class="card-text">@Model.CategoryName</p>
+            <p class="card-text">@Model.ShopName</p>
+            
+            <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">See Details</a>
+        </div>
+    </div>
+
+</div>
+

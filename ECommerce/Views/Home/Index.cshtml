@@ -1,0 +1,27 @@
+﻿@using ECommerce.DTOs
+@{
+    ViewData["Title"] = "Home Page";
+    var test = Model;
+}
+@model List<ProductDetailsDTO>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    
+</div>
+
+
+<div class="row">
+    @foreach (var product in Model)
+    {       
+        @* <partial name="_ProductCard" model="product"></partial> *@
+
+       
+        @Html.Partial("_ProductCard", product);
+        
+    }
+</div>
+
+
+
+

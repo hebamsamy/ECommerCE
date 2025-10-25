@@ -1,0 +1,62 @@
+﻿@using ECommerce.DTOs
+
+@section Styles {
+    <style>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+}
+
+@model ProductCreationDTO;
+@{
+    List<SelectListItem> categories = ViewData["Categories"] as List<SelectListItem>;
+}
+
+<h1>Add New Product</h1>
+<h3>Current Date : @ViewBag.Date </h3>
+<form asp-action="add" asp-controller="Product" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Name"  class="form-label"></label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price"  class="form-label"></label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Quantity"  class="form-label"></label>
+        <input asp-for="Quantity" class="form-control">
+        <span asp-validation-for="Quantity" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input asp-for="Description" class="form-control">
+        <span asp-validation-for="Description" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" asp-items="@categories" class="form-control"></select>
+        <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ExpireDate" class="form-label"></label>
+        <input asp-for="ExpireDate" class="form-control">
+        <span asp-validation-for="ExpireDate" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Images" class="form-label"></label>
+        <input accept="images/*" asp-for="Images" class="form-control">
+        <span asp-validation-for="Images" class="form-text text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

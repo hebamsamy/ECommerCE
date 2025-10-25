@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<RoleDTO>
+
+<h1>System Roles</h1>
+@if(ViewBag.Success == 1){
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Sorry!</h4>
+    <p>ooooo, Add valid Role Name.</p>
+</div>
+}
+else if(ViewBag.Success == 2){
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Aww yeah, you successfully Add Role.</p>
+</div>
+}else if(ViewBag.Success == 3){
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Sorry!</h4>
+    <p> NO Way, you Added this role before</p>
+</div>
+}
+<form style="margin-bottom:30px" asp-action="add" asp-controller="role" method="post">
+    <div>
+        <label >Enter New Role</label>
+        <input class="form-control" name="Name"  type="text"/>
+    </div>
+    <input type="submit" name="Save" value="Save" />
+</form>
+
+<table class="table"> 
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+    </thead>
+
+    <tbody>
+    @foreach(RoleDTO item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td></td>
+        </tr>
+    }
+
+    </tbody>
+</table>
