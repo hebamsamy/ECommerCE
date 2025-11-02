@@ -1,4 +1,5 @@
 ﻿using ECommerce.DTOs;
+using ECommerce.Filters;
 using ECommerce.Models;
 using ECommerce.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -8,9 +9,9 @@ using System.Security.Claims;
 
 namespace ECommerce.Controllers
 {
-    //MVC
+    //Product/______
 
-    
+    //[Route("api/sales/{}/{controller}")]
     public class ProductController : Controller
     {
         private ProductRepository productRepository;
@@ -21,6 +22,7 @@ namespace ECommerce.Controllers
             productRepository = _productRepository;
         }
         [HttpGet]
+        //[Route("products/{Price:decimal}")]
         public IActionResult Index(
             string SearchText = "", decimal Price = 0, int CategoryId = 0,
             string ShopName = "", int PageSize = 3, int PageNumber = 1
@@ -117,6 +119,7 @@ namespace ECommerce.Controllers
 
 
         [Authorize(Policy = "CanModifyProduct")]
+        [AuditFilter]
         public IActionResult Delete(int id)
         {
             var product = productRepository.Get(p => p.Id == id).FirstOrDefault();

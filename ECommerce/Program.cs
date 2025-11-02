@@ -14,7 +14,11 @@ namespace ECommerce
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<ExceptionHandler>();
+
+            });
             //Work as API
             //builder.Services.AddControllers();
 
@@ -64,7 +68,8 @@ namespace ECommerce
 
                     options.AddPolicy("CanModifyProduct", policy =>
                     {
-                        policy.RequireRole("Admin,Supplier").RequireClaim("ModifiesProduct");
+                        //policy.RequireRole("Admin").RequireClaim("ModifiesProduct");
+                        policy.RequireRole("Supplier").RequireClaim("ModifiesProduct");
                     });
                     options.AddPolicy("CanAddProduct", policy =>
                     {
@@ -89,7 +94,15 @@ namespace ECommerce
 
             var app = builder.Build();
 
-            
+
+            //app.Use(async (context, next) =>
+            //{
+            //    Console.WriteLine($"Requested in {DateTime.Now.ToString()}");
+            //    Console.WriteLine($"resource {context.Request.Path}");
+            //    await next();
+            //});
+
+            //IApplicationBuilder
             //make routes table
             app.UseRouting();
 
@@ -112,6 +125,7 @@ namespace ECommerce
             //      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
             //    );
             //});
+
 
             app.Run();
 
